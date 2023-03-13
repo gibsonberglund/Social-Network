@@ -9,6 +9,7 @@
 # Controllers
 # Utils
 # Add friends
+# Add in reactions
 
 # Testing with Insomnia
     --find all users is working
@@ -16,16 +17,22 @@
     --find all thoughts is working
     --post route for users is working
     --post route for thoughts is working
+    --get route for single thought is working (seed data is fucking with the thoughts db)
+    --reactions get added to the database correctly, but do not display when the thought is 'gotten'
+
+
 
 ## TO DO
 
 # Testing with Insomnia
 
-    --cannot test 'find on thought by ID' because I can't figure out how to find the ID of a single thought
-
     --post route for adding a friend is working, but only with the user ID of the friend, not the username
 
-# Add in reactions
+    --for video demonstration need to seed with correct data
+
+
+
+
 
 
 ## Qs for office hours

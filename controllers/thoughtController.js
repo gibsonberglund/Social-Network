@@ -4,7 +4,9 @@ module.exports = {
   // Get all thought
   getThoughts(req, res) {
     Thought.find()
-      .then((thoughts) => res.json(thoughts))
+    .then(async (thoughts) => {
+      return res.json(thoughts);
+    })
       .catch((err) => res.status(500).json(err));
   },
   // Get a thought
@@ -52,4 +54,18 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
+
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      {_id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } },
+    )
+    .then((thought) =>
+      !thought
+      ? res.status(404).json({ message: 'No thought with this id!'})
+      : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  }
 };

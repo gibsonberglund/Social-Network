@@ -25,6 +25,8 @@ connection.once('open', async () => {
     const first = fullName.split(' ')[0];
     const last = fullName.split(' ')[1];
 
+
+  //RIGHT HERE IS WHY ITS PUTTING ALL THOUGHTS UNDER EACH USER'S NAME
     users.push({
       first,
       last,
