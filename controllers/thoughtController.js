@@ -5,7 +5,10 @@ module.exports = {
   getThoughts(req, res) {
     Thought.find()
     .then(async (thoughts) => {
-      return res.json(thoughts);
+      return res.json({
+        thoughts,
+        reactions: [thoughts.reactions]
+      });
     })
       .catch((err) => res.status(500).json(err));
   },
@@ -23,21 +26,22 @@ module.exports = {
   // Create a thought
   createThought(req, res) {
     Thought.create(req.body)
-      .then((thought) => res.json(thought))
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
+    .then((thought) => res.json(thought))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+
   },
+
   // Delete a thought
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
-          : User.deleteMany({ _id: { $in: thought.users } })
+          : res.json({ message: 'Thoughts and User deleted!' })
       )
-      .then(() => res.json({ message: 'Thoughts and User deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
   // Update a thought
